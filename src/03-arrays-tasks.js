@@ -37,10 +37,13 @@ function findElement(arr, value) {
  */
 function generateOdds(len) {
   const arr = [];
+  arr.length = len;
   if (len > 0) {
     arr[0] = 1;
-    for (let i = 1; i < len; i += 1) arr[i] = arr[i - 1] + 2;
   }
+  //   // for (let i = 1; i < len; i += 1) arr[i] = arr[i - 1] + 2;
+  //   let arr1 = arr.map((v, i, arr) => { i += 1; return v + 2; });
+  // }
   return arr;
 }
 
