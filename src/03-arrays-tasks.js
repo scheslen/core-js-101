@@ -203,8 +203,8 @@ function getTail(arr, n) {
  *    +'20,21,22,23,24\n'
  *    +'30,31,32,33,34'
  */
-function toCsvText(/* arr */) {
-  throw new Error('Not implemented');
+function toCsvText(arr) {
+  return arr.map((a) => `${a.join(',')}\n`).join('').slice(0, -1);
 }
 
 /**
@@ -237,8 +237,9 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  let sum = 0;
+  return arr.map((v) => { sum += v; return sum; });
 }
 
 /**
@@ -271,10 +272,20 @@ function getSecondItems(arr) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
-}
+function propagateItemsByPositionIndex(arr) {
+  const aRes = [];
+  if (arr.length > 0) {
+    arr.map((v, i) => {
+      const a = [];
+      a.length = i + 1;
+      a.fill(v);
+      Array.prototype.push.apply(aRes, a);
+      return v;
+    });
+  }
 
+  return aRes;
+}
 
 /**
  * Returns the 3 largest numbers from the specified array
@@ -289,8 +300,8 @@ function propagateItemsByPositionIndex(/* arr */) {
  *   [ 1,2,3,4,5,6,7,8,9,10 ] => [ 10, 9, 8 ]
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
-function get3TopItems(/* arr */) {
-  throw new Error('Not implemented');
+function get3TopItems(arr) {
+  return arr.sort((a, b) => b - a).slice(0, 3);
 }
 
 
@@ -321,11 +332,12 @@ function getPositivesCount(arr) {
  *   [] => []
  *   [ 'nine','one' ]                 => [ 'one', 'nine' ]
  *   [ 'one','two','three' ]          => [ 'one','two', 'three' ]
- *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
+ *   [ 'nine','eight','nine','eight'] => [ 'eight','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const aDigit = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+  return arr.map((v) => aDigit.indexOf(v)).sort((a, b) => a - b).map((i) => aDigit[i]);
 }
 
 /**
@@ -458,8 +470,11 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  const a = [];
+  a.length = end - start + 1;
+  a.fill(start);
+  return a.map((v, i) => v + i);
 }
 
 /**
